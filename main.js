@@ -1,6 +1,8 @@
-window.addEventListener('DOMContentLoaded', function () {
-    const scene = document.querySelector('a-scene');
-    const polarisEntity = document.getElementById('polaris-entity');
+window.addEventListener('DOMContentLoaded', () => {
+  const polarisEntity = document.querySelector('#polaris-entity');
+  polarisEntity.setAttribute('visible', 'true');
+});
+
 
     scene.addEventListener('click', function (event) {
         // Get the click coordinates
