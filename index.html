@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>My A-Frame Project</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras@^6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
     <a-scene>
@@ -13,39 +14,39 @@
       </a-assets>
 
       <!-- Add entity with your 3D model -->
-      <a-entity id="polaris-entity" gltf-model="#polaris-gltf" visible="false"></a-entity>
+      <a-entity id="polaris-entity" gltf-model="#polaris-gltf" animation-mixer visible="false"></a-entity>
     </a-scene>
 
-    <window.addEventListener('DOMContentLoaded', () => {
-  const scene = document.querySelector('a-scene');
-  const polarisEntity = document.querySelector('#polaris-entity');
-  polarisEntity.setAttribute('visible', 'true');
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const scene = document.querySelector('a-scene');
+      const polarisEntity = document.querySelector('#polaris-entity');
+      polarisEntity.setAttribute('visible', 'true');
 
-  scene.addEventListener('click', function (event) {
-    const x = event.clientX;
-    const y = event.clientY;
+      scene.addEventListener('click', function (event) {
+        const x = event.clientX;
+        const y = event.clientY;
 
-    const worldCoordinates = screenToWorldCoordinates(scene, x, y);
+        const worldCoordinates = screenToWorldCoordinates(scene, x, y);
 
-    polarisEntity.setAttribute('position', worldCoordinates);
-    polarisEntity.setAttribute('visible', true);
-  });
+        polarisEntity.setAttribute('position', worldCoordinates);
+        polarisEntity.setAttribute('visible', true);
+      });
 
-  function screenToWorldCoordinates(scene, x, y) {
-    const camera = scene.camera;
-    const vector = new THREE.Vector3();
+      function screenToWorldCoordinates(scene, x, y) {
+        const camera = scene.camera;
+        const vector = new THREE.Vector3();
 
-    vector.set(
-      (x / window.innerWidth) * 2 - 1,
-      -(y / window.innerHeight) * 2 + 1,
-      0.5
-    );
+        vector.set(
+          (x / window.innerWidth) * 2 - 1,
+          -(y / window.innerHeight) * 2 + 1,
+          0.5
+        );
 
-    vector.unproject(camera);
-    return vector;
-  }
-});
->
-    <script src="js/your-script.js"></script>
+        vector.unproject(camera);
+        return vector;
+      }
+    });
+    </script>
   </body>
 </html>
